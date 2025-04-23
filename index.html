@@ -25,57 +25,97 @@ https://www.w3schools.com/w3css/default.asp
 https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file
 -->
 	
-   <head> 
-      <title>App6---HTML5-Canvas</title>  
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      <link rel="stylesheet" href="w3.css">
-      <link rel="stylesheet" href="w3-colors-flat.css">
-   </head> 
-
+<head> 
+  <title>App6---HTML5-Canvas</title>  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="w3.css">
+  <link rel="stylesheet" href="w3-colors-flat.css">
+  <style>
+    .body {
+      margin: 0em;
+    }
+    .canvas-container {
+      text-align: center;
+      padding: 20px;
+    }
+    canvas {
+      border: 2px solid #34495e; /* wet asphalt */
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 10px;
+    }
+    button {
+      margin: 5px;
+    }
+  </style>
+</head> 
 
 <script>
-var docMod = document.lastModified; // loads last modified time stamp into docMod variable
-alert("This file last modified " + docMod); // generates alert box with time stamp. If annoying, comment out this entire line.
-console.log("This file last modified " + docMod); // generates message in javaScript console (found in developers tools) with time stamp. 
+var docMod = document.lastModified;
+alert("This file last modified " + docMod);
+console.log("This file last modified " + docMod);
 </script>
-
-
-
-<style>	
-.body {
-     margin: 0em;
-}
-.page {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: -100vw;
-    overflow-y: auto;
-    z-index: 0;
-    background-color: hsl(0,0%,100%);
-}
-  .page:target {
-    left: 0vw;
-    z-index: 1;
-}
-</style>
 
 <body>
 <div id="header" class="w3-container w3-flat-carrot">
-	<h1>App6---HTML5-Canvas</h1>
+  <h1>App6---HTML5-Canvas</h1>
 </div>
-	
-<div id="content" class="w3-container">
-	<p>Content goes here.</p>
-		
-	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
- 	
-	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+
+<div class="w3-container canvas-container">
+  <!-- Create the canvas where everything will be drawn -->
+  <canvas id="myCanvas" width="300" height="300"></canvas>
+
+  <!-- Buttons to interact with canvas -->
+  <div class="button-container">
+    <button class="w3-button w3-flat-turquoise" onclick="drawRectangle()">Draw Rectangle</button>
+    <button class="w3-button w3-flat-pomegranate" onclick="drawName()">Draw Name</button>
+    <button class="w3-button w3-flat-green-sea" onclick="drawImage()">Draw Image</button>
+    <button class="w3-button w3-flat-silver" onclick="clearCanvas()">Clear Canvas</button>
+  </div>
+</div>
+
+<script>
+// Get canvas and context
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+
+// Function to draw a rectangle
+function drawRectangle() {
+  ctx.fillStyle = "#1abc9c"; // turquoise color
+  ctx.fillRect(50, 50, 200, 100); // x, y, width, height
+}
+
+// Function to write a name on the canvas
+function drawName() {
+  ctx.font = "24px Arial";
+  ctx.fillStyle = "#e74c3c"; // alizarin (red) color
+  ctx.fillText("Ukpono Udobong", 50, 200); // text, x, y
+}
+
+// Function to draw an image
+function drawImage() {
+  const img = new Image();
+  img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/UT_Tower_at_night_2019.jpg/320px-UT_Tower_at_night_2019.jpg"; // example image URL
+  img.onload = () => ctx.drawImage(img, 50, 220, 200, 75); // img, x, y, width, height
+}
+
+// Function to clear the canvas
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+</script>
+
+<div class="w3-container">
+  <p>
+    The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin. This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only.
+  </p>
+  <p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+</div>
 
 <footer class="w3-bottom w3-container w3-flat-carrot">
-	<p>DIY!</p>
+  <p>DIY!</p>
 </footer>
 
 </body>
