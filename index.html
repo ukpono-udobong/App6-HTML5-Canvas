@@ -1,121 +1,113 @@
-<!DOCTYPE html> 
-<html> 
-<!-- The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin. 
-This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code does so at their own risk.
-Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.
+<!DOCTYPE html>
+<html>
+<!-- 
+This code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin.
+This HTML5 application demonstrates basic canvas functionality for educational purposes only.
 
-THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
-
-Authors in chronological order of contribution:
+Authors:
 Tim Riedel
-Ukpono Udobong
+Ukpono Udobong (Student Contributor)
 
-Further Information:
-http://cns.utexas.edu/fri
-
-Research Educator:
-Timothy Riedel
-triedel@utexas.edu
-
-Brief Description of Goal of Code:
-This app creates an HTML5 canvas that allows users to draw a rectangle, display their name, add an image, and clear the canvas.
-
-Known Issues:
-None.
+Disclaimer:
+This code is shared for demonstration and entertainment purposes. It should not be used for medical diagnosis or treatment.
 -->
 
-<head> 
-  <title>App6---HTML5-Canvas</title>  
+<head>
+  <title>App6---HTML5-Canvas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Import W3.CSS and flat color styles -->
   <link rel="stylesheet" href="w3.css">
   <link rel="stylesheet" href="w3-colors-flat.css">
-  <style>
-    .body {
-      margin: 0em;
-    }
-    .canvas-container {
-      text-align: center;
-      padding: 20px;
-    }
-    canvas {
-      border: 2px solid #34495e; /* wet asphalt */
-    }
-    .button-container {
-      text-align: center;
-      margin-top: 10px;
-    }
-    button {
-      margin: 5px;
-    }
-  </style>
-</head> 
+</head>
 
 <script>
-var docMod = document.lastModified;
-alert("This file last modified " + docMod);
-console.log("This file last modified " + docMod);
+  // Display the last modified date of this file when the page loads
+  var docMod = document.lastModified;
+  alert("This file last modified " + docMod); // Pops up an alert with the last modified date
+  console.log("This file last modified " + docMod); // Logs the last modified date to the console
 </script>
+
+<style>
+  .body {
+    margin: 0em; /* Removes default margin around the body */
+  }
+  .page {
+    width: 100vw; /* Sets page width to full viewport width */
+    height: 100vh; /* Sets page height to full viewport height */
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    overflow-y: auto; /* Enables vertical scrolling */
+    z-index: 0;
+    background-color: hsl(0,0%,100%); /* White background */
+  }
+  .page:target {
+    left: 0vw;
+    z-index: 1; /* Makes the target page visible */
+  }
+  canvas {
+    border: 2px solid #34495e; /* Adds a dark border around canvas */
+    background-color: #ecf0f1; /* Light grey canvas background */
+  }
+</style>
 
 <body>
-<div id="header" class="w3-container w3-flat-carrot">
-  <h1>App6---HTML5-Canvas</h1>
-</div>
-
-<div class="w3-container canvas-container">
-  <!-- Create the canvas where everything will be drawn -->
-  <canvas id="myCanvas" width="300" height="300"></canvas>
-
-  <!-- Buttons to interact with canvas -->
-  <div class="button-container">
-    <button class="w3-button w3-flat-turquoise" onclick="drawRectangle()">Draw Rectangle</button>
-    <button class="w3-button w3-flat-pomegranate" onclick="drawName()">Draw Name</button>
-    <button class="w3-button w3-flat-green-sea" onclick="drawImage()">Draw Image</button>
-    <button class="w3-button w3-flat-silver" onclick="clearCanvas()">Clear Canvas</button>
+  <!-- Header bar -->
+  <div id="header" class="w3-container w3-flat-carrot">
+    <h1>App6---HTML5-Canvas</h1>
   </div>
-</div>
 
-<script>
-// Get canvas and context
-const canvas = document.getElementById("myCanvas");
-const ctx = canvas.getContext("2d");
+  <!-- Main content area -->
+  <div id="content" class="w3-container">
+    <p>Welcome! Use the buttons below to draw, write, or clear the canvas.</p>
 
-// Function to draw a rectangle
-function drawRectangle() {
-  ctx.fillStyle = "#1abc9c"; // turquoise color
-  ctx.fillRect(50, 50, 200, 100); // x, y, width, height
-}
+    <!-- Canvas element for drawing -->
+    <canvas id="myCanvas" width="300" height="300"></canvas><br>
 
-// Function to write a name on the canvas
-function drawName() {
-  ctx.font = "24px Arial";
-  ctx.fillStyle = "#e74c3c"; // alizarin (red) color
-  ctx.fillText("Ukpono Udobong", 50, 200); // text, x, y
-}
+    <!-- Control buttons for canvas actions -->
+    <button onclick="drawRectangle()" class="w3-button w3-flat-peter-river">Draw Rectangle</button>
+    <button onclick="drawText()" class="w3-button w3-flat-emerald">Draw Name</button>
+    <button onclick="drawImage()" class="w3-button w3-flat-sun-flower">Draw Image</button>
+    <button onclick="clearCanvas()" class="w3-button w3-flat-alizarin">Clear Canvas</button>
 
-// Function to draw an image
-function drawImage() {
-  const img = new Image();
-  img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/UT_Tower_at_night_2019.jpg/320px-UT_Tower_at_night_2019.jpg"; // example image URL
-  img.onload = () => ctx.drawImage(img, 50, 220, 200, 75); // img, x, y, width, height
-}
+    <script>
+      // Get the canvas and its context
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
 
-// Function to clear the canvas
-function clearCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-</script>
+      // Draws a rectangle on the canvas
+      function drawRectangle() {
+        ctx.fillStyle = "#3498db"; // Blue color fill
+        ctx.fillRect(50, 50, 150, 100); // Draw rectangle (x, y, width, height)
+      }
 
-<div class="w3-container">
-  <p>
-    The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin. This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only.
-  </p>
-  <p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
-</div>
+      // Writes text (your name) onto the canvas
+      function drawText() {
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "#2c3e50"; // Dark text color
+        ctx.fillText("Ukpono Udobong", 60, 200); // Draw text at x=60, y=200
+      }
 
-<footer class="w3-bottom w3-container w3-flat-carrot">
-  <p>DIY!</p>
-</footer>
+      // Draws an image onto the canvas
+      function drawImage() {
+        var img = new Image();
+        img.onload = function() {
+          ctx.drawImage(img, 10, 10, 100, 100); // Draw image at top-left corner
+        };
+        img.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/UT_wordmark.svg/1280px-UT_wordmark.svg.png"; // Sample image URL
+      }
 
+      // Clears the entire canvas
+      function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear all canvas content
+      }
+    </script>
+
+    <!-- Footer information -->
+    <footer class="w3-bottom w3-container w3-flat-carrot">
+      <p>DIY Diagnostics Stream • UT Austin</p>
+    </footer>
+  </div>
 </body>
 </html>
