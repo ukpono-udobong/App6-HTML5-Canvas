@@ -1,12 +1,12 @@
-<!DOCTYPE html> 
-<html> 
-<!-- The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only.  Any user of this code does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.
+<!DOCTYPE html>
+<html>
+<!-- The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin. This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.
 
 THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
 
 Authors in chronological order of contribution:
 Tim Riedel
-Author 2
+Ukpono Udobong
 
 Further Information:
 http://cns.utexas.edu/fri
@@ -16,110 +16,105 @@ Timothy Riedel
 triedel@utexas.edu
 
 Brief Description of Goal of Code:
-This app allows users to draw on an HTML5 canvas via four buttons: draw a rectangle, write a name, insert an image, and reset the canvas.
+Demonstrates drawing on an HTML5 canvas with buttons to draw a rectangle, text, load an image, and clear the canvas.
 
 Known Issues:
 None
 -->
-	
-<head> 
-  <title>App6---HTML5-Canvas</title>  
+
+<head>
+  <title>App6---HTML5-Canvas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="w3.css">
   <link rel="stylesheet" href="w3-colors-flat.css">
-  <style>
-    .body {
-      margin: 0em;
-    }
-    .page {
-      width: 100vw;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: -100vw;
-      overflow-y: auto;
-      z-index: 0;
-      background-color: hsl(0,0%,100%);
-    }
-    .page:target {
-      left: 0vw;
-      z-index: 1;
-    }
-    canvas {
-      border: 3px solid #2c3e50; /* Nice dark blue border */
-    }
-  </style>
-  <script>
-    // Show when the file was last modified for development tracking
-    var docMod = document.lastModified;
-    alert("This file last modified " + docMod);
-    console.log("This file last modified " + docMod);
-
-    let canvas, ctx;
-
-    function setupCanvas() {
-      canvas = document.getElementById("myCanvas");
-      ctx = canvas.getContext("2d");
-    }
-
-    // Draws a filled rectangle on the canvas
-    function drawRectangle() {
-      ctx.fillStyle = "#3498db"; // Peter River blue
-      ctx.fillRect(50, 50, 200, 100); // x, y, width, height
-    }
-
-    // Draws your name on the canvas
-    function drawName() {
-      ctx.fillStyle = "#2ecc71"; // Emerald green
-      ctx.font = "24px Arial";
-      ctx.fillText("Ukpono Udobong", 60, 200); // text, x, y
-    }
-
-    // Loads and draws an image on the canvas
-    function drawImage() {
-      let img = new Image();
-      img.onload = function () {
-        ctx.drawImage(img, 100, 220, 150, 150); // image, x, y, width, height
-      }
-      img.src = "https://th.bing.com/th/id/OIP.pskKrUwDImzjvOfjGjOX0AAAAA?rs=1&pid=ImgDetMain";
-    }
-
-    // Clears the entire canvas
-    function clearCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-  </script>
 </head>
 
-<body onload="setupCanvas()">
+<script>
+// Log the last modified timestamp for debugging version updates
+var docMod = document.lastModified;
+alert("This file last modified " + docMod);
+console.log("This file last modified " + docMod);
+</script>
+
+<style>
+.body {
+  margin: 0em;
+}
+.page {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -100vw;
+  overflow-y: auto;
+  z-index: 0;
+  background-color: hsl(0,0%,100%);
+}
+.page:target {
+  left: 0vw;
+  z-index: 1;
+}
+</style>
+
+<body>
+  <!-- Header -->
   <div id="header" class="w3-container w3-flat-carrot">
     <h1>App6---HTML5-Canvas</h1>
   </div>
 
+  <!-- Main Content -->
   <div id="content" class="w3-container">
-    <canvas id="myCanvas" width="360" height="500"></canvas>
+    <p>This application demonstrates basic canvas functionality including drawing shapes, text, images, and clearing the canvas.</p>
 
-    <!-- Button Section -->
-    <div class="w3-container w3-margin-top">
-      <button class="w3-button w3-flat-peter-river" onclick="drawRectangle()">Draw Rectangle</button>
-      <button class="w3-button w3-flat-emerald" onclick="drawName()">Draw My Name</button>
-      <button class="w3-button w3-flat-amethyst" onclick="drawImage()">Load Image</button>
-      <button class="w3-button w3-flat-alizarin" onclick="clearCanvas()">Clear Canvas</button>
-    </div>
+    <!-- Canvas element -->
+    <canvas id="myCanvas" width="350" height="400" style="border:2px solid #34495e;"></canvas>
 
-    <!-- Informative Text -->
-    <p class="w3-margin-top">
-      This app allows users to interact with an HTML5 canvas via button controls. Developed in the DIY Diagnostics Stream.
-    </p>
-
-    <p>
-      THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
-    </p>
+    <!-- Buttons for interaction -->
+    <br>
+    <button onclick="drawRectangle()">Draw Rectangle</button>
+    <button onclick="drawName()">Draw Name</button>
+    <button onclick="drawImage()">Draw Image</button>
+    <button onclick="clearCanvas()">Clear Canvas</button>
   </div>
 
+  <!-- Footer -->
   <footer class="w3-bottom w3-container w3-flat-carrot">
     <p>DIY!</p>
   </footer>
+
+  <!-- JavaScript Functions -->
+  <script>
+    // Access canvas and its context
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Draw a rectangle on the canvas
+    function drawRectangle() {
+      ctx.fillStyle = "#3498db"; // Peter River color
+      ctx.fillRect(20, 20, 150, 100); // x, y, width, height
+    }
+
+    // Draw text (name) on the canvas
+    function drawName() {
+      ctx.font = "20px Arial";
+      ctx.fillStyle = "#2ecc71"; // Emerald color
+      ctx.fillText("Ukpono", 50, 200); // x, y position of text
+    }
+
+    // Load and draw an image onto the canvas
+    function drawImage() {
+      const img = new Image();
+      img.onload = function () {
+        ctx.drawImage(img, 100, 220, 150, 150); // Draw image at x=100, y=220 with width=150, height=150
+      };
+      img.src = "https://th.bing.com/th/id/OIP.pskKrUwDImzjvOfjGjOX0AAAAA?rs=1&pid=ImgDetMain";
+    }
+
+    // Clear the canvas
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear entire canvas
+    }
+  </script>
 </body>
 </html>
